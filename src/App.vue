@@ -11,7 +11,7 @@ import ProductDisplay from './components/ProductDisplay.vue';
 export default {
   name: 'App',
   components: {
-    // Daftarkan komponen agar bisa digunakan di template
+    // mendaftarkan komponen agar bisa digunakan di template
     ProductDisplay
   }
 }
