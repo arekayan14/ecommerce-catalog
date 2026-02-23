@@ -1,28 +1,36 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ProductDisplay />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// Import komponen dari folder components
+import ProductDisplay from './components/ProductDisplay.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // Daftarkan komponen agar bisa digunakan di template
+    ProductDisplay
   }
 }
 </script>
 
 <style>
+/* Reset dasar agar tampilan rapi di semua browser */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

@@ -1,0 +1,44 @@
+/* WOMEN SECTION - Purple Elegant */
+.page-women {
+  --bg-primary: var(--women-bg);
+  --color-primary: var(--women-primary);
+  --color-accent: var(--women-accent);
+  --color-text: var(--women-text);
+}
+
+.page-women .product-container {
+  background: var(--bg-primary);
+  border-top: 5px solid var(--color-primary);
+  border: 1px solid var(--border);
+}
+
+.page-women .product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  background: radial-gradient(circle at 20% 80%, var(--color-accent), transparent);
+}
+
+.page-women .product-card {
+  background: linear-gradient(145deg, var(--white) 0%, var(--color-accent) 30%);
+  border-left: 5px solid var(--color-primary);
+  border: 1px solid var(--border);
+}
+
+.page-women .product-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+.page-women .product-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  background: var(--color-accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-block;
+}
