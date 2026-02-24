@@ -1,32 +1,46 @@
 <template>
   <div :class="['page-wrapper', containerClass]">
     
-    <div v-if="loading" class="loader">Tunggu bentar ya...</div>
+    <div v-if="loading" class="loader-container">
+      <div class="loader"></div>
+      <p>Please wait...</p>
+    </div>
 
-    <div v-else-if="!isUnavailable" class="product-card">
+    <div v-else-if="!isUnavailable && product.id" class="product-card">
       <div class="product-image">
-        <img :src="product.image" alt="product image" />
+        <img :src="product.image" :alt="product.title" />
       </div>
       <div class="product-details">
-        <h1 :class="themeText">{{ product.title }}</h1>
+        <h1 :class="['product-title', themeTextClass]">{{ product.title }}</h1>
         <div class="product-meta">
-          <span>{{ product.category }}</span>
-          <span>{{ product.rating.rate }}/5</span>
+          <span class="category">{{ product.category }}</span>
+          <div class="rating">
+            <span>{{ product.rating.rate }}/5</span>
+            <div class="rating-dots">
+              <span v-for="n in 5" :key="n" 
+                :class="['dot', n <= Math.round(product.rating.rate) ? themeBgClass : '']">
+              </span>
+            </div>
+          </div>
         </div>
         <hr />
         <p class="description">{{ product.description }}</p>
         <hr />
-        <div :class="['price', themeText]">${{ product.price }}</div>
+        <div :class="['price', themeTextClass]">${{ product.price }}</div>
         <div class="button-group">
-          <button :class="['btn-buy', themeBg]">Buy now</button>
-          <button @click="getNextProduct" :class="['btn-next', themeBorder, themeText]">Next product</button>
+          <button :class="['btn-buy', themeBgClass]">Buy now</button>
+          <button @click="getNextProduct" :class="['btn-next', themeBorderClass, themeTextClass]">
+            Next product
+          </button>
         </div>
       </div>
     </div>
 
     <div v-else class="unavailable-card">
-      <p>This product is unavailable to show</p>
-      <button @click="getNextProduct" class="btn-next-gray">Next product</button>
+      <div class="unavailable-content">
+        <p>This product is unavailable to show</p>
+        <button @click="getNextProduct" class="btn-next-unavailable">Next product</button>
+      </div>
     </div>
   </div>
 </template>
@@ -35,84 +49,148 @@
 export default {
   data() {
     return {
-      index: 0, // Hint API 4: Start index
-      product: {}, // Hint API 5: Variable buat simpen balasan
+      product: {},
+      index: 0, // page 1-20
       loading: false,
       isUnavailable: false
     };
   },
   computed: {
-    // Logika nentuin desain (Hint Desain 4)
     containerClass() {
       if (this.isUnavailable) return 'bg-unavailable';
-      return this.product.category === "men's clothing" ? 'bg-men' : 'bg-women';
-    },
-    themeText() { return this.product.category === "men's clothing" ? 'text-men' : 'text-women'; },
-    themeBg() { return this.product.category === "men's clothing" ? 'btn-men' : 'btn-women'; },
-    themeBorder() { return this.product.category === "men's clothing" ? 'border-men' : 'border-women'; }
+      
+      if (this.product.category === "men's clothing") {
+        return 'bg-men';
+      } else if (this.product.category === "women's clothing") {
+        return 'bg-women';
+      }
+      return 'bg-unavailable';
+    }
   },
   methods: {
+    "men's clothing": [{ 
+    id: 1, 
+    title: "Mens Casual Premium Slim Fit T-Shirts",
+    description: "4's star long sleeve Henley shirts light weight soft fabric raglan baseball style neckline with 3 buttons. The Henley round neck drop shoulder sleeve and solid color design make it look more stylish and casual.",
+    price: 29.95, 
+    image: 'https://via.placeholder.com/350x220?text=Men+T-Shirt',
+    rating: 4.5
+  }],
     async getNextProduct() {
       this.loading = true;
-      
-      // Kembali ke produk 1 jika sudah lewat produk ke 20
+      // Increment index 1-20
       this.index = this.index >= 20 ? 1 : this.index + 1;
 
       try {
-        // Fakestore API untuk ambil produk berdasarkan index
         const response = await fetch(`https://fakestoreapi.com/products/${this.index}`);
         const data = await response.json();
 
-        // Condition, cek kategori
+        // Cek kategori
         if (data.category === "men's clothing" || data.category === "women's clothing") {
           this.product = data;
           this.isUnavailable = false;
         } else {
-        // Jika kategori lain, disimpan menjadi unavailable produk
           this.isUnavailable = true;
         }
       } catch (error) {
-        console.error("Waduh, koneksi putus:", error);
-      } finally {
-        this.loading = false;
-      }
+        this.isUnavailable = true;
+        } finally {
+        setTimeout(() => { this.loading = false; }, 500);
+        }
     }
   },
   mounted() {
-    this.getNextProduct(); // Jalanin pertama kali pas web dibuka
+    this.getNextProduct();
   }
-};
+}
 </script>
 
-<style>
-/* Panggil sesuai urutan struktur folder lo */
-@import '../assets/style/color-palette.css';
-@import '../assets/style/men-section.css';
-@import '../assets/style/women-section.css';
-@import '../assets/style/unavail-product.css';
+<style scoped>
+/* Import CSS dari folder assets */
+@import "../assets/style/color-palette.css";
+@import "../assets/style/men-section.css";
+@import "../assets/style/women-section.css";
+@import "../assets/style/unavail-product.css";
 
-/* Tambahkan styling umum untuk layout card-nya */
+/* CSS untuk Loader Spinner */
+.loader-container {
+  text-align: center;
+}
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto 20px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Layout dasar */
 .page-wrapper {
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  transition: 0.3s;
+  transition: background-color 0.3s ease;
 }
-
 .product-card {
   background: white;
   display: flex;
-  padding: 40px;
+  padding: 50px;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  width: 80%;
+  width: 90%;
   max-width: 1000px;
-  gap: 30px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.product-image img {
+  max-width: 300px;
+  max-height: 400px;
+}
+.product-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+.category {
+  font-size: 0.9rem;
+  color: gray;
+}
+.dot {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid currentColor;
+}
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.description {
+  margin: 10px 0 90px 0;
+}
+.product-details {
+  padding-left: 40px;
+  flex: 1;
+}
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 10px 0 20px 0;
 }
 
-.product-image img {
-  width: 300px;
-  height: auto;
+/* Responsive */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
 }
 </style>
