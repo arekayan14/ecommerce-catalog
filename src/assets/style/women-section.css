@@ -1,4 +1,11 @@
-/* WOMEN SECTION - Purple Elegant */
+/* WOMEN SECTION */
+.bg-women {
+  background-color: var(--color-women-primary) !important;
+}
+.text-women {
+  color: var(--color-women-primary);
+}
+
 .page-women {
   --bg-primary: var(--women-bg);
   --color-primary: var(--women-primary);
@@ -41,4 +48,45 @@
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   display: inline-block;
+}
+
+/*  Tombol Buy Now dan Next Product */
+.page-women .product-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: space-between;
+}
+
+.page-women .btn-primary {
+  flex: 1;
+  background: var(--women-primary);
+  color: var(--white);
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-women .btn-primary:hover {
+  background: var(--women-secondary);
+  transform: translateY(-1px);
+}
+
+.page-women .btn-secondary {
+  background: transparent;
+  color: var(--women-primary);
+  border: 2px solid var(--women-accent);
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-women .btn-secondary:hover {
+  background: var(--women-primary);
+  color: var(--white);
 }

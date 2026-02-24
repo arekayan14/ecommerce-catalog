@@ -1,4 +1,8 @@
 /* UNAVAILABLE PRODUCT SECTION */
+.bg-unavailable {
+  background-color: var(--unavailable-bg);
+}
+
 .page-unavailable {
   --bg-primary: var(--unavailable-bg);
   --color-primary: var(--unavailable-primary);
@@ -39,4 +43,20 @@
   opacity: 0.8;
   max-width: 500px;
   line-height: 1.6;
+}
+
+/* Button Unavailable Product */
+.btn-next-unavailable {
+  background: rgb(90, 90, 90);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  margin: 20px 0 0 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.btn-next-unavailable:hover {
+  background: grey;
 }

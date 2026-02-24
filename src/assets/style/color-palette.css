@@ -1,4 +1,5 @@
-/* Color Palette dari Figma PDF [file:11] */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
   /* Men Section */
   --men-primary: #002772;
@@ -31,4 +32,33 @@
   border-radius: 16px;
   box-shadow: 0 4px 20px var(--shadow);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
 }
+
+/* Global Font & Background */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body, .products-page {
+  background: var(--men-bg);
+  min-height: 100vh;
+  padding: var(--space-xl);
+}
+
+.product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px var(--shadow);
+  padding: var(--space-xl);
+  border: 1px solid var(--border);
+}
+
+
