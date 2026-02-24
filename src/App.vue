@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style>
-/* Reset dasar agar tampilan rapi di semua browser */
+/* Reset dasar agar tampilan rapih di semua browser */
 * {
   margin: 0;
   padding: 0;
