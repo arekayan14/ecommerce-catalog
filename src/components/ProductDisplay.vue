@@ -29,6 +29,7 @@
         <div :class="['price', themeTextClass]">${{ product.price }}</div>
         <div class="button-group">
           <button :class="['btn-buy', themeBgClass]">Buy now</button>
+          
           <button @click="getNextProduct" :class="['btn-next', themeBorderClass, themeTextClass]">
             Next product
           </button>
@@ -37,9 +38,15 @@
     </div>
 
     <div v-else class="unavailable-card">
+      <div class="overlay-image">
+        <img src="../assets/sad-img.png" alt="Unavailable background" class="sad-face-img" />
+      </div>
+
       <div class="unavailable-content">
         <p>This product is unavailable to show</p>
-        <button @click="getNextProduct" class="btn-next-unavailable">Next product</button>
+        <button @click="getNextProduct" class="btn-next-unavailable">
+          Next product
+        </button>
       </div>
     </div>
   </div>
@@ -50,7 +57,7 @@ export default {
   data() {
     return {
       product: {},
-      index: 0, // page 1-20
+      index: 0, 
       loading: false,
       isUnavailable: false
     };
@@ -58,34 +65,37 @@ export default {
   computed: {
     containerClass() {
       if (this.isUnavailable) return 'bg-unavailable';
-      
-      if (this.product.category === "men's clothing") {
-        return 'bg-men';
-      } else if (this.product.category === "women's clothing") {
-        return 'bg-women';
-      }
+      if (this.product.category === "men's clothing") return 'bg-men';
+      if (this.product.category === "women's clothing") return 'bg-women';
       return 'bg-unavailable';
-    }
+    },
+    // Menambahkan class untuk warna teks tema (judul & harga)
+    themeBgClass() {
+    if (this.product.category === "men's clothing") return 'bg-men-btn';
+    return 'bg-women-btn';
   },
+  
+  // Memberikan class warna teks & border (untuk tombol Next Product)
+  themeTextClass() {
+    if (this.product.category === "men's clothing") return 'text-men';
+    return 'text-women';
+  },
+  
+  themeBorderClass() {
+    if (this.product.category === "men's clothing") return 'border-men';
+    return 'border-women';
+  }
+},
   methods: {
-    "men's clothing": [{ 
-    id: 1, 
-    title: "Mens Casual Premium Slim Fit T-Shirts",
-    description: "4's star long sleeve Henley shirts light weight soft fabric raglan baseball style neckline with 3 buttons. The Henley round neck drop shoulder sleeve and solid color design make it look more stylish and casual.",
-    price: 29.95, 
-    image: 'https://via.placeholder.com/350x220?text=Men+T-Shirt',
-    rating: 4.5
-  }],
     async getNextProduct() {
       this.loading = true;
-      // Increment index 1-20
-      this.index = this.index >= 20 ? 1 : this.index + 1;
+      this.index = this.index >= 20 ? 1 : this.index + 1; // Sesuai hint API nomor 6
 
       try {
         const response = await fetch(`https://fakestoreapi.com/products/${this.index}`);
         const data = await response.json();
 
-        // Cek kategori
+        // Cek kategori sesuai hint API nomor 5
         if (data.category === "men's clothing" || data.category === "women's clothing") {
           this.product = data;
           this.isUnavailable = false;
@@ -94,9 +104,9 @@ export default {
         }
       } catch (error) {
         this.isUnavailable = true;
-        } finally {
-        setTimeout(() => { this.loading = false; }, 500);
-        }
+      } finally {
+        setTimeout(() => { this.loading = false; }, 500); // Simulasi delay untuk loader
+      }
     }
   },
   mounted() {
