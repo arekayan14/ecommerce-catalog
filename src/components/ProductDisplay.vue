@@ -69,13 +69,13 @@ export default {
       if (this.product.category === "women's clothing") return 'bg-women';
       return 'bg-unavailable';
     },
-    // Menambahkan class untuk warna teks tema (judul & harga)
+    // Menambahkan class untuk warna teks tema judul & harga
     themeBgClass() {
     if (this.product.category === "men's clothing") return 'bg-men-btn';
     return 'bg-women-btn';
   },
   
-  // Memberikan class warna teks & border (untuk tombol Next Product)
+  // Memberikan class warna teks & border untuk tombol Next Product
   themeTextClass() {
     if (this.product.category === "men's clothing") return 'text-men';
     return 'text-women';
@@ -89,13 +89,13 @@ export default {
   methods: {
     async getNextProduct() {
       this.loading = true;
-      this.index = this.index >= 20 ? 1 : this.index + 1; // Sesuai hint API nomor 6
+      this.index = this.index >= 20 ? 1 : this.index + 1;
 
       try {
         const response = await fetch(`https://fakestoreapi.com/products/${this.index}`);
         const data = await response.json();
 
-        // Cek kategori sesuai hint API nomor 5
+        // Cek kategori
         if (data.category === "men's clothing" || data.category === "women's clothing") {
           this.product = data;
           this.isUnavailable = false;
