@@ -1,9 +1,18 @@
-/* MEN SECTION */
+/* Men Section */
 .bg-men {
-  background-color: var(--color-men-primary) !important;
+  background-color: #D6E6FF !important;
+}
+.bg-men-btn {
+  background-color: var(--men-primary); /* #002772 */
+  color: white;
+  border: none;
+}
+.border-men {
+  border: 2px solid var(--men-secondary);
+  background: white;
 }
 .text-men {
-  color: var(--color-men-primary);
+  color: var(--men-primary);
 }
 
 .page-men .product-grid {
