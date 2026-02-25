@@ -73,19 +73,19 @@ export default {
     themeBgClass() {
     if (this.product.category === "men's clothing") return 'bg-men-btn';
     return 'bg-women-btn';
+    },
+    
+    // Memberikan class warna teks & border untuk tombol Next Product
+    themeTextClass() {
+      if (this.product.category === "men's clothing") return 'text-men';
+      return 'text-women';
+    },
+    
+    themeBorderClass() {
+      if (this.product.category === "men's clothing") return 'border-men';
+      return 'border-women';
+    }
   },
-  
-  // Memberikan class warna teks & border untuk tombol Next Product
-  themeTextClass() {
-    if (this.product.category === "men's clothing") return 'text-men';
-    return 'text-women';
-  },
-  
-  themeBorderClass() {
-    if (this.product.category === "men's clothing") return 'border-men';
-    return 'border-women';
-  }
-},
   methods: {
     async getNextProduct() {
       this.loading = true;

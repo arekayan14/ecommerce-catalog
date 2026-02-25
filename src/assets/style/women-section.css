@@ -1,4 +1,8 @@
 /* Women Section */
+.bg-women {
+  background-color: #F8E4FF !important;
+}
+
 .text-women {
   color: #720060 !important;
 }
