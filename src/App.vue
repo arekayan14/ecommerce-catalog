@@ -5,31 +5,32 @@
 </template>
 
 <script>
-// Import komponen dari folder components
 import ProductDisplay from './components/ProductDisplay.vue';
 
 export default {
   name: 'App',
   components: {
-    // mendaftarkan komponen agar bisa digunakan di template
     ProductDisplay
   }
 }
 </script>
 
 <style>
-/* Reset dasar agar tampilan rapih di semua browser */
+/* Reset dasar */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: sans-serif;
+html, body {
+  height: 100%;
+  width: 100%;
 }
 
 #app {
+  /* Memastikan elemen utama aplikasi memenuhi layar*/
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
