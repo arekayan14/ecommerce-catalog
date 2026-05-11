@@ -39,7 +39,7 @@
 
     <div v-else class="unavailable-card">
       <div class="overlay-image">
-        <img src="../assets/sad-img.png" alt="Unavailable background" class="sad-face-img" />
+        <img src="../assets/sad-img.png" alt="Unavailable background" class="sad-face-img" style="width: 200px; height: auto;"/>
       </div>
 
       <div class="unavailable-content">
@@ -148,6 +148,7 @@ export default {
   justify-content: center;
   align-items: center;
   transition: background-color 0.3s ease;
+  padding: 20px;
 }
 .product-card {
   background: white;
@@ -196,11 +197,113 @@ export default {
   margin: 10px 0 20px 0;
 }
 
+/* Button group */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1rem;
+  .product-card {
+    flex-direction: column;
+    padding: 24px 20px;
+    width: 95%;
+  }
+
+  .product-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .product-image img {
+    max-width: 200px;
+    max-height: 260px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .product-details {
+    padding-left: 0;
+  }
+
+  .product-title {
+    font-size: 1.3rem;
+  }
+
+  .product-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .description {
+    margin: 10px 0 30px 0;
+    font-size: 0.9rem;
+  }
+
+  .price {
+    font-size: 1.3rem;
+  }
+
+  .btn-buy,
+  .btn-next {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    margin: 0;
+    padding: 0.65rem 1rem;
+  }
+
+  .unavailable-card {
+    width: 95%;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .unavailable-content p {
+    font-size: 1rem;
+  }
+
+  .btn-next-unavailable {
+    margin: 16px 0 0 0;
+  }
+
+  .loader-container {
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    padding: 18px 14px;
+    width: 98%;
+  }
+
+  .product-image img {
+    max-width: 160px;
+    max-height: 200px;
+  }
+
+  .product-title {
+    font-size: 1.1rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .price {
+    font-size: 1.15rem;
+  }
+
+  .btn-buy,
+  .btn-next {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
   }
 }
 </style>
